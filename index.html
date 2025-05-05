@@ -1,74 +1,102 @@
-<!-- enhanced.html -->
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <!-- Meta tags and SEO same as before -->
-    <link rel="stylesheet" href="enhanced-styles.css">
-    <script type="module" src="enhanced-app.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidFactory Pro - AI Video Creation Suite</title>
+    <meta name="description" content="Enterprise-grade text-to-video solution with multilingual support and AI-powered media selection">
+    <meta name="keywords" content="video creator, text to video, multilingual video, content creation tool">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "VidFactory Pro",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0.00",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+    crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- Loading overlay -->
-        <div class="loading-overlay" aria-live="polite">
-            <div class="loading-spinner"></div>
+    <header class="app-header">
+        <h1 aria-label="VidFactory Pro - Intelligent Video Creation">VidFactory Pro</h1>
+        <div class="ad-unit header-ad" role="region" aria-label="Advertisement">
+            <ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1234567890"></ins>
         </div>
+    </header>
 
-        <!-- Settings panel -->
-        <aside class="settings-panel glass-container" aria-label="Application settings">
-            <div class="settings-header">
-                <h2 data-translate="settings">Settings</h2>
-                <button class="close-panel" aria-label="Close settings">&times;</button>
+    <main class="app-container">
+        <section class="control-panel">
+            <!-- Language Selector -->
+            <div class="language-switcher">
+                <button data-lang="en" class="active">EN</button>
+                <button data-lang="es">ES</button>
+                <button data-lang="fr">FR</button>
+                <button data-lang="de">DE</button>
             </div>
-            <div class="settings-content">
-                <div class="voice-controls">
-                    <h3 data-translate="voice_settings">Voice Settings</h3>
-                    <div class="voice-options">
-                        <div class="voice-preview">
-                            <audio controls class="voice-preview-player"></audio>
-                        </div>
-                    </div>
+
+            <!-- Script Input -->
+            <div class="script-editor">
+                <textarea id="mainScript" aria-label="Video script input" 
+                          placeholder="Start typing or paste your script..." 
+                          data-translate="script_placeholder"></textarea>
+            </div>
+
+            <!-- Media Gallery -->
+            <div class="media-gallery">
+                <h2 data-translate="media_header">Suggested Media</h2>
+                <div id="autoMedia" class="media-grid"></div>
+            </div>
+
+            <!-- Voice Studio -->
+            <div class="voice-studio">
+                <h2 data-translate="voice_header">Voice Configuration</h2>
+                <div id="voiceProfiles" class="voice-grid"></div>
+                <div class="preview-controls">
+                    <button id="previewVoice" data-translate="preview_voice">Preview Voice</button>
+                    <button id="stopPreview" data-translate="stop_preview">Stop</button>
                 </div>
             </div>
+
+            <!-- Music Library -->
+            <div class="music-library">
+                <h2 data-translate="music_header">Background Score</h2>
+                <div id="trackList" class="music-grid"></div>
+                <div class="mixer-controls">
+                    <input type="range" id="musicVolume" min="0" max="1" step="0.1" value="0.5">
+                    <span id="volumeValue">50%</span>
+                </div>
+            </div>
+
+            <button class="generate-btn" data-translate="generate_button">Create Video</button>
+        </section>
+
+        <aside class="preview-panel">
+            <div class="ad-unit sidebar-ad">
+                <ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="0987654321"></ins>
+            </div>
+            <div id="videoPreview" class="video-output"></div>
         </aside>
+    </main>
 
-        <!-- Main editor interface -->
-        <main class="editor-container">
-            <header class="editor-header">
-                <button class="menu-button" aria-label="Main menu">
-                    <span class="menu-icon"></span>
-                </button>
-                <h1 class="brand-logo">VidForge Pro</h1>
-                <div class="header-controls">
-                    <button class="export-button glass-button" data-translate="export">
-                        Export Video
-                    </button>
-                </div>
-            </header>
+    <footer class="app-footer">
+        <div class="ad-unit footer-ad">
+            <ins class="adsbygoogle" data-ad-client="ca-pub-XXXXXXXXXXXXXXXX" data-ad-slot="1122334455"></ins>
+        </div>
+    </footer>
 
-            <!-- Timeline component -->
-            <section class="timeline-container" aria-label="Video timeline">
-                <div class="timeline-track">
-                    <div class="timeline-scrubber"></div>
-                </div>
-            </section>
-
-            <!-- Enhanced media browser -->
-            <section class="media-browser">
-                <div class="media-filter-controls">
-                    <input type="search" class="media-search glass-input" 
-                           data-translate="search_media" 
-                           aria-label="Search media">
-                    <div class="media-type-filter">
-                        <button class="filter-button active" data-type="all">All</button>
-                        <button class="filter-button" data-type="video">Video</button>
-                        <button class="filter-button" data-type="image">Images</button>
-                    </div>
-                </div>
-                <div class="ai-media-grid">
-                    <!-- Dynamic media cards will be inserted here -->
-                </div>
-            </section>
-        </main>
-    </div>
+    <script src="app.js"></script>
 </body>
 </html>

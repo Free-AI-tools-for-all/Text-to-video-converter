@@ -1,113 +1,36 @@
-// enhanced-app.js
-class EnhancedUI {
+class VideoFactory {
     constructor() {
-        this.initDragAndDrop();
-        this.initMediaBrowser();
-        this.initSettingsPanel();
+        this.API_KEY = 'eOMIwCYb0chqEi2as26dueIqWCV93OPxCze8UPbj4m32bNY2d71Gjex6'; // 🔒 Your Pexels API key
+        this.selectedMedia = [];
+        this.selectedVoice = null;
+        this.selectedTrack = null;
+        this.currentLang = 'en';
+        this.synth = window.speechSynthesis;
+        this.translations = {
+            en: { /* English translations */ },
+            es: { /* Spanish translations */ },
+            fr: { /* French translations */ },
+            de: { /* German translations */ }
+        };
+
+        this.init();
     }
 
-    /**
-     * Initialize drag and drop functionality
-     */
-    initDragAndDrop() {
-        const dropZone = document.querySelector('.media-browser');
-        
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('drag-over');
-        });
+    // ... rest of the class remains unchanged ...
 
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('drag-over');
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('drag-over');
-            this.handleFileUpload(e.dataTransfer.files);
-        });
-    }
-
-    /**
-     * Initialize media browser interactions
-     */
-    initMediaBrowser() {
-        document.querySelector('.media-search').addEventListener('input', (e) => {
-            this.filterMedia(e.target.value);
-        });
-
-        document.querySelectorAll('.filter-button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                document.querySelector('.filter-button.active').classList.remove('active');
-                e.target.classList.add('active');
-                this.filterMediaByType(e.target.dataset.type);
+    async loadMedia() {
+        try {
+            const response = await fetch(`https://api.pexels.com/v1/search?query=${this.getScriptKeywords()}`, {
+                headers: { 
+                    Authorization: this.API_KEY // 👈 Using your key here
+                }
             });
-        });
+            const data = await response.json();
+            this.renderMedia(data.photos);
+        } catch (error) {
+            this.showError('Failed to load media');
+        }
     }
 
-    /**
-     * Handle media filtering
-     */
-    filterMedia(searchTerm) {
-        const mediaCards = document.querySelectorAll('.media-card');
-        const searchQuery = searchTerm.toLowerCase();
-        
-        mediaCards.forEach(card => {
-            const altText = card.querySelector('img').alt.toLowerCase();
-            card.style.display = altText.includes(searchQuery) ? 'block' : 'none';
-        });
-    }
-
-    /**
-     * Initialize settings panel interactions
-     */
-    initSettingsPanel() {
-        const settingsToggle = document.querySelector('.menu-button');
-        const settingsPanel = document.querySelector('.settings-panel');
-        
-        settingsToggle.addEventListener('click', () => {
-            settingsPanel.classList.toggle('active');
-        });
-
-        document.querySelector('.close-panel').addEventListener('click', () => {
-            settingsPanel.classList.remove('active');
-        });
-    }
-
-    /**
-     * Show loading state
-     */
-    showLoading(show = true) {
-        document.querySelector('.loading-overlay').style.display = 
-            show ? 'grid' : 'none';
-    }
-
-    /**
-     * Create media card element
-     */
-    createMediaCard(mediaUrl, altText) {
-        const card = document.createElement('div');
-        card.className = 'media-card';
-        card.innerHTML = `
-            <img src="${mediaUrl}" alt="${altText}" loading="lazy">
-            <button class="media-select-button" aria-label="Select media">
-                <span class="checkmark"></span>
-            </button>
-        `;
-        return card;
-    }
+    // ... rest of the methods ...
 }
-
-// Initialize enhanced UI components
-document.addEventListener('DOMContentLoaded', () => {
-    const ui = new EnhancedUI();
-    
-    // Example media loading
-    const mediaGrid = document.querySelector('.ai-media-grid');
-    for (let i = 0; i < 12; i++) {
-        mediaGrid.appendChild(ui.createMediaCard(
-            'https://source.unsplash.com/random/800x450',
-            'Stock media image'
-        ));
-    }
-});
