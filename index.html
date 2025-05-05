@@ -1,0 +1,74 @@
+<!-- enhanced.html -->
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- Meta tags and SEO same as before -->
+    <link rel="stylesheet" href="enhanced-styles.css">
+    <script type="module" src="enhanced-app.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Loading overlay -->
+        <div class="loading-overlay" aria-live="polite">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <!-- Settings panel -->
+        <aside class="settings-panel glass-container" aria-label="Application settings">
+            <div class="settings-header">
+                <h2 data-translate="settings">Settings</h2>
+                <button class="close-panel" aria-label="Close settings">&times;</button>
+            </div>
+            <div class="settings-content">
+                <div class="voice-controls">
+                    <h3 data-translate="voice_settings">Voice Settings</h3>
+                    <div class="voice-options">
+                        <div class="voice-preview">
+                            <audio controls class="voice-preview-player"></audio>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main editor interface -->
+        <main class="editor-container">
+            <header class="editor-header">
+                <button class="menu-button" aria-label="Main menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <h1 class="brand-logo">VidForge Pro</h1>
+                <div class="header-controls">
+                    <button class="export-button glass-button" data-translate="export">
+                        Export Video
+                    </button>
+                </div>
+            </header>
+
+            <!-- Timeline component -->
+            <section class="timeline-container" aria-label="Video timeline">
+                <div class="timeline-track">
+                    <div class="timeline-scrubber"></div>
+                </div>
+            </section>
+
+            <!-- Enhanced media browser -->
+            <section class="media-browser">
+                <div class="media-filter-controls">
+                    <input type="search" class="media-search glass-input" 
+                           data-translate="search_media" 
+                           aria-label="Search media">
+                    <div class="media-type-filter">
+                        <button class="filter-button active" data-type="all">All</button>
+                        <button class="filter-button" data-type="video">Video</button>
+                        <button class="filter-button" data-type="image">Images</button>
+                    </div>
+                </div>
+                <div class="ai-media-grid">
+                    <!-- Dynamic media cards will be inserted here -->
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
